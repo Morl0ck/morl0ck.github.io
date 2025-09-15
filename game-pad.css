@@ -9,4 +9,6 @@
 .fight-stick .x {
     bottom: 66px;
     right: 31px;
+    top: unset;
+    left: unset;
 }
