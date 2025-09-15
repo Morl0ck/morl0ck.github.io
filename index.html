@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morl0ck's GitHub Repositories</title>
+    <link rel="stylesheet" href="game-pad.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #58a6ff;
+            margin-bottom: 40px;
+        }
+        
+        .repo-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        
+        .repo-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .repo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            border-color: #58a6ff;
+        }
+        
+        .repo-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .repo-title a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        
+        .repo-title a:hover {
+            text-decoration: underline;
+        }
+        
+        .repo-description {
+            color: #8b949e;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+        
+        .repo-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #8b949e;
+        }
+        
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .star-icon {
+            color: #f1e05a;
+        }
+        
+        .fork-icon {
+            color: #8b949e;
+        }
+        
+        .language {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #21262d;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+        
+        .archived {
+            opacity: 0.6;
+        }
+        
+        .archived .repo-title::after {
+            content: " [ARCHIVED]";
+            color: #f85149;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Morl0ck's GitHub Repositories</h1>
+        <div class="repo-grid" id="repositories">
+            <!-- Repositories will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Repository data sorted by popularity (star count)
+        const repositories = [
+            {
+                name: "cloudflare-duc-go",
+                full_name: "Morl0ck/cloudflare-duc-go",
+                description: "Cloudflare DNS Update Client written in Go",
+                html_url: "https://github.com/Morl0ck/cloudflare-duc-go",
+                language: "Go",
+                stargazers_count: 5,
+                forks_count: 1,
+                archived: false,
+                topics: ["cloudflare", "ddns", "ddns-updater", "dns"]
+            },
+            {
+                name: "dns-rewrite-go",
+                full_name: "Morl0ck/dns-rewrite-go",
+                description: "",
+                html_url: "https://github.com/Morl0ck/dns-rewrite-go",
+                language: "Go",
+                stargazers_count: 2,
+                forks_count: 1,
+                archived: false
+            },
+            {
+                name: "GroupMeApi",
+                full_name: "Morl0ck/GroupMeApi",
+                description: "C# GroupMe Api DLL",
+                html_url: "https://github.com/Morl0ck/GroupMeApi",
+                language: "C#",
+                stargazers_count: 2,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "chrome-ext-PlayPausePandora",
+                full_name: "Morl0ck/chrome-ext-PlayPausePandora",
+                description: "Play / Pause Pandora Chrome Extension",
+                html_url: "https://github.com/Morl0ck/chrome-ext-PlayPausePandora",
+                language: "JavaScript",
+                stargazers_count: 2,
+                forks_count: 5,
+                archived: true
+            },
+            {
+                name: "dns-rewrite-dotnet",
+                full_name: "Morl0ck/dns-rewrite-dotnet",
+                description: "",
+                html_url: "https://github.com/Morl0ck/dns-rewrite-dotnet",
+                language: "C#",
+                stargazers_count: 2,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "wow-addon-icicle",
+                full_name: "Morl0ck/wow-addon-icicle",
+                description: "",
+                html_url: "https://github.com/Morl0ck/wow-addon-icicle",
+                language: "Lua",
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "heroku",
+                full_name: "Morl0ck/heroku",
+                description: "",
+                html_url: "https://github.com/Morl0ck/heroku",
+                language: "JavaScript",
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "jquery.teg",
+                full_name: "Morl0ck/jquery.teg",
+                description: "Custom Functions For Work",
+                html_url: "https://github.com/Morl0ck/jquery.teg",
+                language: "JavaScript",
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "spqueries-android",
+                full_name: "Morl0ck/spqueries-android",
+                description: "An android class that will facilitate SharePoint Web Service Queries",
+                html_url: "https://github.com/Morl0ck/spqueries-android",
+                language: "Java",
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "morl0ck.github.io",
+                full_name: "Morl0ck/morl0ck.github.io",
+                description: "",
+                html_url: "https://github.com/Morl0ck/morl0ck.github.io",
+                language: "CSS",
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "hots-talents-overlay",
+                full_name: "Morl0ck/hots-talents-overlay",
+                description: "",
+                html_url: "https://github.com/Morl0ck/hots-talents-overlay",
+                language: "C#",
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "chrome-ext-SkipIntro",
+                full_name: "Morl0ck/chrome-ext-SkipIntro",
+                description: "",
+                html_url: "https://github.com/Morl0ck/chrome-ext-SkipIntro",
+                language: "JavaScript",
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            },
+            {
+                name: "Android-Java-Playground",
+                full_name: "Morl0ck/Android-Java-Playground",
+                description: "This is where all my android applications are",
+                html_url: "https://github.com/Morl0ck/Android-Java-Playground",
+                language: null,
+                stargazers_count: 0,
+                forks_count: 0,
+                archived: false
+            }
+        ];
+
+        function renderRepositories() {
+            const container = document.getElementById('repositories');
+            
+            repositories.forEach(repo => {
+                const repoCard = document.createElement('div');
+                repoCard.className = `repo-card ${repo.archived ? 'archived' : ''}`;
+                
+                repoCard.innerHTML = `
+                    <div class="repo-title">
+                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
+                            ${repo.name}
+                        </a>
+                    </div>
+                    ${repo.description ? `<div class="repo-description">${repo.description}</div>` : ''}
+                    <div class="repo-stats">
+                        <div class="stat">
+                            <span class="star-icon">★</span>
+                            <span>${repo.stargazers_count}</span>
+                        </div>
+                        <div class="stat">
+                            <span class="fork-icon">⑂</span>
+                            <span>${repo.forks_count}</span>
+                        </div>
+                    </div>
+                    ${repo.language ? `<div class="language">${repo.language}</div>` : ''}
+                `;
+                
+                container.appendChild(repoCard);
+            });
+        }
+
+        // Render repositories when page loads
+        document.addEventListener('DOMContentLoaded', renderRepositories);
+    </script>
+</body>
+</html>
